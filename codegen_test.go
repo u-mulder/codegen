@@ -54,6 +54,18 @@ func ExampleCodegen_Generate() {
 	// Output: <?='123-321'?>
 }
 
+func ExampleCodegen_RegisterDefaultGenerators() {
+	c, _ := codegen.New()
+
+	c.RegisterDefaultGenerators()
+	_, errOne := c.Generate("uf")
+	_, errTwo := c.Generate("ibprop")
+	_, errThree := c.Generate("non_ex_g")
+
+	fmt.Println(errOne, errTwo, errThree)
+	// Output: <nil> <nil> Generator with such name not found
+}
+
 func quickEcho(c *codegen.Codegen) string {
 	var r, tmpStr string
 
